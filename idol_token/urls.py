@@ -15,5 +15,5 @@ urlpatterns = [
     path('idol/', get_idol, name='idol_detail'),
     path('register_idol/', register_idol, name = 'register_idol'),
     path('item/', register_item, name='register_item'),
-    path('purchace_item', purchace_item, name='purchace_item'),
+    path('purchase_item/', purchase_item, name='purchase_item'),
 ]
