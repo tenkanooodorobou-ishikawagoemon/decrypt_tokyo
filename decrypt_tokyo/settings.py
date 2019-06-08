@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'idol_token',
     'cloudinary',
     'cloudinary_storage',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
