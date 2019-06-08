@@ -81,7 +81,7 @@ def register_item(request):
 
         return JsonResponse(data)
 
-def purchaste_item(request):
+def purchase_item(request):
     if request.method == 'POST':
         params = request.POST
         token = params.get('tokenID')
