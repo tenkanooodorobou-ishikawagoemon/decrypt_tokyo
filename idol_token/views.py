@@ -6,18 +6,18 @@ import json
 
 # Create your views here.
 def top(request):
-    data = list(Idol.objects.all()[:4].values("id", "name", "image", "address", "construct_id"))
-    return JsonResponse({"data": data})
+    data = list(Idol.objects.all()[:4].values('id', 'name', 'image', 'address', 'construct_id'))
+    return JsonResponse({'data': data})
 
-# Show the "Idol" page
+# Show the 'Idol' page
 def idol(request, idol_id):
-    data = list(Idol.objects.filter(id = idol_id).values("id", "name", "image", "address", "construct_id"))
-    return JsonResponse({"data": data})
+    data = list(Idol.objects.filter(id = idol_id).values('id', 'name', 'image', 'address', 'construct_id'))
+    return JsonResponse({'data': data})
 
 # Show all Idol data
 def all_idol(request):
-    data = list(Idol.objects.all().values("id", "name", "image", "address", "construct_id"))
-    return JsonResponse({"data": data})
+    data = list(Idol.objects.all().values('id', 'name', 'image', 'address', 'construct_id'))
+    return JsonResponse({'data': data})
 
 def get_idol(request):
     if request.method == 'GET':
@@ -43,6 +43,26 @@ def get_index(request):
     }
     return JsonResponse(data)
 
+# Resist Idol
+def register_idol(request):
+    if request.method == 'POST':
+        params = request.POST
+        name = params.get('name')
+        image = request.FILES.get('image')
+        ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+        address = params.get('address')
+        url = ret['secure_url']
+        construct_id = params.get('construct_id')
+        idol = Idol.objects.create(
+            name = name,
+            image = url,
+            address = address,
+            construct_id = construct_id,
+            )
+        data = {
+            'id': idol.id,
+        }
+        return JsonResponse(data)
 
 def register_item(request):
     if request.method == 'POST':
