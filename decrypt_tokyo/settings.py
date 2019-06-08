@@ -92,8 +92,7 @@ if DEBUG:
         }
     }
 else:
-    db_from_env = dj_database_url.config(conn_max_age=400)
-    DATABASES['default'].update(db_from_env)
+    DATABASES['default'] = dj_database_url.config(conn_max_age=400)
 
 
 # Password validation
