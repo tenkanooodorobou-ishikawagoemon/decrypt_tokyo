@@ -13,4 +13,5 @@ urlpatterns = [
     # path("test/", test, name = "test"),
     path('index/', get_index, name='index'),
     path('idol/', get_idol, name='idol_detail'),
+    path('item/' register_item, name='register_item')
 ]
