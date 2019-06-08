@@ -45,12 +45,12 @@ def get_index(request):
 
 # Resist Idol
 def register_idol(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         params = request.POST
         name = params.get('name')
         # image = request.FILES.get('image')
         # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
-        # address = params.get('address')
+        address = params.get('address')
         # url = ret['secure_url']
         idol = Idol.objects.create(
             name = name,
