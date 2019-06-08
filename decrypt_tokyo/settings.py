@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'decrypt_tokyo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+DATABASES = {}
 if DEBUG:
     DATABASES = {
         'default': {
