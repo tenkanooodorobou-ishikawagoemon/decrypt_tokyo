@@ -15,17 +15,28 @@ import cloudinary, cloudinary.uploader, cloudinary.forms, cloudinary.api
 
 if __name__ == '__main__':
 
-    image='redhat_72px_34197_easyicon.net_crrkmb4.png'
+    image='いくた.jpeg'
 
     ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
-
-    print(ret)
-
+    url = ret['secure_url']
 
 
-    # idol = Idol.objects.create(
-    #     name='田中ひよこ',
-    #     image='redhat_72px_34197_easyicon.net_crrkmb4.png',
-    #     address='1243567654ffdsadfsdf'
-    # )
-    # print(idol)
+    idol = Idol.objects.create(
+        name='生田絵梨花',
+        image=url,
+        address='1243567654ffdsadfsdf'
+    )
+    print(idol)
+
+    image2 = 'dEcfeNTso1tI5LIG3YOvtk5kFJzXkAL175KsGPKtRCQ.jpg'
+    ret2 = cloudinary.uploader.upload(image2, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+    url2 = ret2['secure_url']
+
+    idol2 = Idol.objects.create(
+        name='丹生明里',
+        image=url2,
+        address='htryrt4t34rjfiejriwejfdiewjfd'
+
+    )
+
+    print(idol2)
