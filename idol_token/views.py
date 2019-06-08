@@ -80,8 +80,8 @@ def register_idol(request):
             return JsonResponse(data)
 
 def register_item(request):
-    if request.method == 'POST':
-        params = request.POST
+    if request.method == 'GET':
+        params = request.GET
         title = params.get('title')
         image = request.FILES.get('image')
         if image:
