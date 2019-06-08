@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 class Idol(models.Model):
     name = models.CharField(max_length = 50)
-    image = CloudinaryField('image', blank=True, null=True,)
+    image = models.CharField('image', max_length=256, blank=True, null=True,)
     address = models.CharField(max_length=255)
     construct_id = models.CharField(max_length = 250, null=True, blank=True)
 
