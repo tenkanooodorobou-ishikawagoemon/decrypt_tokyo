@@ -33,10 +33,12 @@ def get_idol(request):
         return JsonResponse(io)
 
 def get_index(request):
-    recomends = Idol.objects.all().order_by('name')[4:].values('id', 'name', 'image', 'address')
+    recomends = Idol.objects.all().order_by('name').values('id', 'name', 'image', 'address')
     recomends_list = list(recomends)
-    ranking = Idol.objects.all().order_by('-name')[4:].values('id', 'name', 'image', 'address')
+    ranking = Idol.objects.all().order_by('-name').values('id', 'name', 'image', 'address')
     ranking_data = list(ranking)
+
+
     data = {
         'recomends': recomends_list,
         'ranking': ranking_data
@@ -115,3 +117,16 @@ def purchase_item(request):
 def item_detail(request, pk=None):
     if request.method == 'GET':
         print('kojhf', pk)
+
+        try:
+            item = Idol_Item.objects.get(token=pk)
+        except:
+            content = {'message': 'access denied'}
+            return JsonResponse(content)
+        else:
+            data = {
+                'title': item.title,
+                'image': item.image
+            }
+
+            return JsonResponse(data)
