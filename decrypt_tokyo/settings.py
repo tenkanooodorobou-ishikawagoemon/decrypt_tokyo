@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +25,10 @@ SECRET_KEY = 'c-s5mn5$(ixp67aw$lj2t&&qz08khy*pu!b!sf$uihq-4f_uro'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if os.environ["DEBUG"] == 'False':
+    DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -74,16 +79,21 @@ WSGI_APPLICATION = 'decrypt_tokyo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'idol_token',
-        'USER': 'root',
-        'HOST': '',
-        'PORT': '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'idol_token',
+            'USER': 'root',
+            "PASSWORD": '',
+            'HOST': '',
+            'PORT': '',
 
+        }
     }
-}
+else:
+    db_from_env = dj_database_url.config(conn_max_age=400)
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation
