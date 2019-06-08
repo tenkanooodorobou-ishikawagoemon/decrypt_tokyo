@@ -23,10 +23,10 @@ def get_idol(request, pk=None):
     return JsonResponse(data)
 
 def get_index(request):
-    recomends = Idol.objects.all()[4:].order_by('name').values('id', 'name', 'image', 'address')
+    recomends = Idol.objects.all().order_by('name')[4:].values('id', 'name', 'image', 'address')
     recomends_list = list(recomends)
 
-    ranking = Idol.objects.all()[4:].order_by('-name').values('id', 'name', 'image', 'address')
+    ranking = Idol.objects.all().order_by('-name')[4:].values('id', 'name', 'image', 'address')
     ranking_data = list(ranking)
 
     data = {
