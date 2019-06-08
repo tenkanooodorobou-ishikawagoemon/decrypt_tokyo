@@ -129,14 +129,13 @@ def item_detail(request, pk=None):
     if request.method == 'GET':
 
         try:
-            item = Idol_Item.objects.get(token=pk)
+            item = Idol_Item.objects.get(id=pk)
         except:
             content = {'message': 'access denied'}
             return JsonResponse(content)
         else:
             data = {
-                'title': item.title,
-                'image': item.image
+                'title': item.title
             }
 
             return JsonResponse(data)

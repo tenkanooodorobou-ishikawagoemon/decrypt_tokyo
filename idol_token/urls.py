@@ -16,5 +16,5 @@ urlpatterns = [
     path('register_idol/', register_idol, name = 'register_idol'),
     path('register_item/', register_item, name='register_item'),
     path('purchase_item/', purchase_item, name='purchase_item'),
-    path('item/<str:pk>/', item_detail, name='item_detail' )
+    path('item/<int:pk>/', item_detail, name='item_detail' )
 ]
