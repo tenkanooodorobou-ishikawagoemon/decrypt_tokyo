@@ -6,5 +6,6 @@ urlpatterns = [
     path("", top, name = "top"),
     #=========TEST=============
     path("test/", test, name = "test"),
-    path('index/', get_index, name='index')
+    path('index/', get_index, name='index'),
+    path('idol/', get_idol, name='idol')
 ]

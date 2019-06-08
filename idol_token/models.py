@@ -13,10 +13,10 @@ class Idol(models.Model):
 
 class Idol_Item(models.Model):
     title = models.CharField(max_length=50)
-    idol = models.ForeignKey(Idol, on_delete = models.CASCADE)
+    idol = models.ForeignKey(Idol, on_delete = models.CASCADE, blank=True, null=True)
     contents = models.CharField(max_length=250, null=True, blank=True)
     price = models.IntegerField(default = 0)
-    image = CloudinaryField('image', blank=True, null=True,)
+    image = models.CharField('image', max_length=256, blank=True, null=True,)
     total_issue_value = models.IntegerField(default = 0)
 
     def __str__(self):
