@@ -1,9 +1,10 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Idol(models.Model):
     name = models.CharField(max_length = 50)
-    image = models.ImageField(null=True, blank=True)
+    image = CloudinaryField('image', blank=True, null=True,)
     address = models.CharField(max_length=255)
     construct_id = models.CharField(max_length = 250, null=True, blank=True)
 
@@ -15,7 +16,7 @@ class Idol_Item(models.Model):
     idol = models.ForeignKey(Idol, on_delete = models.CASCADE)
     contents = models.CharField(max_length=250, null=True, blank=True)
     price = models.IntegerField(default = 0)
-    image = models.ImageField(null=True, blank=True)
+    image = CloudinaryField('image', blank=True, null=True,)
     total_issue_value = models.IntegerField(default = 0)
 
     def __str__(self):
