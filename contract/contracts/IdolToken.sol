@@ -19,6 +19,7 @@ contract IdolToken is ERC721Full {
     }
 
     mapping (address => uint256[]) public ownedVoices;
+    mapping (address => uint256) public balanceOfOwnedVoices;
     mapping (uint256 => Voice) public voices; // voiceId : Voice
     mapping (uint256 => uint256) public voiceIds; // tokenId : voiceId
     
@@ -34,6 +35,8 @@ contract IdolToken is ERC721Full {
             price: _price
         });
         voices[_voiceId] = newVoice;
+        ownedVoices[msg.sender].push(_voiceId);
+        balanceOfOwnedVoices[msg.sender]++;
     }
 
     function getVoice(uint256 _voiceId) public view returns(address, uint256, uint256, uint256) {
