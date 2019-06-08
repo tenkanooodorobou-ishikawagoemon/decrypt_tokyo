@@ -24,14 +24,11 @@ def get_idol(request, pk=None):
     data = {
         'data': idol
     }
-
     return JsonResponse(data)
 
 def get_index(request):
     recomends = Idol.objects.all()[4:].values('id', 'name', 'image', 'address')
-
     ranking = Idol.objects.all()[:4].values('id', 'name', 'image', 'address')
-
     data = {
         'recomends': recomends,
         'ranking': ranking
