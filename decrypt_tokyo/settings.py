@@ -79,6 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'idol_token',
         'USER': 'root',
+        'HOST': '',
+        'PORT': '',
 
     }
 }
