@@ -52,12 +52,10 @@ def register_idol(request):
         ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
         address = params.get('address')
         url = ret['secure_url']
-        construct_id = params.get('construct_id')
         idol = Idol.objects.create(
             name = name,
             image = url,
             address = address,
-            construct_id = construct_id,
             )
         data = {
             'id': idol.id,
@@ -79,6 +77,22 @@ def register_item(request):
 
         data = {
             'id': item.id
+        }
+
+        return JsonResponse(data)
+
+def purchace_item(request):
+    if request.method == 'POST':
+        params = request.POST
+        token = params.get('tokenID')
+        item = params.get('itemID')
+
+        item = Idol_Item.objects.get(id=item)
+        item.token = token
+        token.save()
+
+        data = {
+            'id': item.id,
         }
 
         return JsonResponse(data)
