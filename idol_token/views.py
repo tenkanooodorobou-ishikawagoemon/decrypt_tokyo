@@ -50,15 +50,19 @@ def register_idol(request):
     if request.method == "POST":
         params = request.POST
         name = params.get('name')
-        # image = request.FILES.get('image')
-        # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+        image = request.FILES.get('image')
+        if image:
+            ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+            url = ret['secure_url']
+        else:
+            url='https://res.cloudinary.com/hlimgugdc/image/upload/v1560035850/samplename.png'
         address = params.get('address')
-        # url = ret['secure_url']
 
         try:
             idol = Idol(
                 name = name,
                 address = address,
+                image=url
             )
             idol.save()
         except:
@@ -75,13 +79,17 @@ def register_item(request):
     if request.method == 'POST':
         params = request.GET
         title = params.get('POST')
-        # image = request.FILES.get('image')
-        # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
-        # url = ret['secure_url']
+        image = request.FILES.get('image')
+        if image:
+            ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+            url = ret['secure_url']
+        else:
+            url = 'https://res.cloudinary.com/hlimgugdc/image/upload/v1560035850/samplename.png'
 
         try:
             item = Idol_Item(
                 title=title,
+                image=url
             )
             item.save()
         except Exception as e:
@@ -111,12 +119,10 @@ def purchase_item(request):
         }
 
 
-
         return JsonResponse(data)
 
 def item_detail(request, pk=None):
     if request.method == 'GET':
-        print('kojhf', pk)
 
         try:
             item = Idol_Item.objects.get(token=pk)
