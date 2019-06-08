@@ -52,34 +52,47 @@ def register_idol(request):
         # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
         address = params.get('address')
         # url = ret['secure_url']
-        idol = Idol.objects.create(
-            name = name,
-            # image = url,
-            address = address,
+
+        try:
+            idol = Idol(
+                name = name,
+                address = address,
             )
-        data = {
-            'id': idol.id,
-        }
-        return JsonResponse(data)
+            idol.save()
+        except:
+            content = {'message': 'access denied'}
+            return JsonResponse(content)
+        else:
+            data = {
+                'id': idol.id,
+            }
+
+            return JsonResponse(data)
 
 def register_item(request):
     if request.method == 'POST':
-        params = request.POST
-        title = params.get('title')
+        params = request.GET
+        title = params.get('POST')
         # image = request.FILES.get('image')
         # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
         # url = ret['secure_url']
 
-        item = Idol_Item.objects.create(
-            title=title,
-            # image=url
-        )
+        try:
+            item = Idol_Item(
+                title=title,
+            )
+            item.save()
+        except Exception as e:
+            print(e)
+            content = {'message': 'access denied'}
+            return JsonResponse(content)
+        else:
+            data = {
+                'id': item.id
+            }
+            return JsonResponse(data)
 
-        data = {
-            'id': item.id
-        }
 
-        return JsonResponse(data)
 
 def purchase_item(request):
     if request.method == 'POST':
@@ -95,7 +108,10 @@ def purchase_item(request):
             'id': item.id,
         }
 
+
+
         return JsonResponse(data)
 
-# def item(request, pk=None):
-#     if request.method == 'GET':
+def item_detail(request, pk=None):
+    if request.method == 'GET':
+        print('kojhf', pk)
