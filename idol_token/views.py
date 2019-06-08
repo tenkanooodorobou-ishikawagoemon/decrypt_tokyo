@@ -47,8 +47,9 @@ def get_index(request):
 
 # Resist Idol
 def register_idol(request):
-    if request.method == "POST":
-        params = request.POST
+    print('urei')
+    if request.method == "GET":
+        params = request.GET
         name = params.get('name')
         image = request.FILES.get('image')
         if image:
@@ -58,6 +59,8 @@ def register_idol(request):
             url='https://res.cloudinary.com/hlimgugdc/image/upload/v1560035850/samplename.png'
         address = params.get('address')
 
+        print('ioioio')
+
         try:
             idol = Idol(
                 name = name,
@@ -65,7 +68,8 @@ def register_idol(request):
                 image=url
             )
             idol.save()
-        except:
+        except Exception as e:
+            print(e)
             content = {'message': 'access denied'}
             return JsonResponse(content)
         else:
@@ -77,8 +81,8 @@ def register_idol(request):
 
 def register_item(request):
     if request.method == 'POST':
-        params = request.GET
-        title = params.get('POST')
+        params = request.POST
+        title = params.get('title')
         image = request.FILES.get('image')
         if image:
             ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
