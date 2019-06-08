@@ -4,4 +4,6 @@ from .views import *
 
 urlpatterns = [
     path("", top, name = "top"),
+    #=========TEST=============
+    path("test/", test, name = "test"),
 ]
