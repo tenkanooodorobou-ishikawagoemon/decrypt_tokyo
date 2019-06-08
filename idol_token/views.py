@@ -48,13 +48,13 @@ def register_idol(request):
     if request.method == 'POST':
         params = request.POST
         name = params.get('name')
-        image = request.FILES.get('image')
-        ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
-        address = params.get('address')
-        url = ret['secure_url']
+        # image = request.FILES.get('image')
+        # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+        # address = params.get('address')
+        # url = ret['secure_url']
         idol = Idol.objects.create(
             name = name,
-            image = url,
+            # image = url,
             address = address,
             )
         data = {
@@ -66,13 +66,13 @@ def register_item(request):
     if request.method == 'POST':
         params = request.POST
         title = params.get('title')
-        image = request.FILES.get('image')
-        ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
-        url = ret['secure_url']
+        # image = request.FILES.get('image')
+        # ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
+        # url = ret['secure_url']
 
         item = Idol_Item.objects.create(
             title=title,
-            image=url
+            # image=url
         )
 
         data = {
@@ -81,7 +81,7 @@ def register_item(request):
 
         return JsonResponse(data)
 
-def purchase_item(request):
+def purchaste_item(request):
     if request.method == 'POST':
         params = request.POST
         token = params.get('tokenID')
@@ -96,3 +96,6 @@ def purchase_item(request):
         }
 
         return JsonResponse(data)
+
+# def item(request, pk=None):
+#     if request.method == 'GET':
