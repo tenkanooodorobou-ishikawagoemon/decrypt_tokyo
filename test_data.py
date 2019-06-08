@@ -26,6 +26,7 @@ if __name__ == '__main__':
         image=url,
         address='1243567654ffdsadfsdf'
     )
+    idol.save()
     print(idol)
 
     image2 = 'dEcfeNTso1tI5LIG3YOvtk5kFJzXkAL175KsGPKtRCQ.jpg'
@@ -38,5 +39,8 @@ if __name__ == '__main__':
         address='htryrt4t34rjfiejriwejfdiewjfd'
 
     )
+    idol2.save()
+
+    print(Idol.objects.all())
 
     print(idol2)
