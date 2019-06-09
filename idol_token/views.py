@@ -129,8 +129,10 @@ def item_detail(request, pk=None):
     if request.method == 'GET':
 
         try:
+            pk = int(pk)
             item = Idol_Item.objects.get(id=pk)
-        except:
+        except Except as e:
+            print(e)
             content = {'message': 'access denied'}
             return JsonResponse(content)
         else:
