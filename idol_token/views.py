@@ -83,7 +83,7 @@ def register_item(request):
         params = request.GET
         title = params.get('title')
         image = request.FILES.get('image')
-        address = request.get('address')
+        address = params.get('address')
         if address:
             print('取得')
         else:
