@@ -83,6 +83,11 @@ def register_item(request):
         params = request.GET
         title = params.get('title')
         image = request.FILES.get('image')
+        address = request.get('address')
+        if address:
+            print('取得')
+        else:
+            address = ''
         if image:
             ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
             url = ret['secure_url']
@@ -92,7 +97,8 @@ def register_item(request):
         try:
             item = Idol_Item(
                 title=title,
-                image=url
+                image=url,
+                token=address,
             )
             item.save()
         except Exception as e:
@@ -130,13 +136,18 @@ def item_detail(request, pk=None):
         try:
             pk = int(pk)
             item = Idol_Item.objects.get(id=pk)
+            address = item.token
+
+            idol = Idol.objects.filter(address=address).first()
+
         except Except as e:
             print(e)
             content = {'message': 'access denied'}
             return JsonResponse(content)
         else:
             data = {
-                'title': item.title
+                'title': item.title,
+                'idol_name': idol.name
             }
 
             return JsonResponse(data)
