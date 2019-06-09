@@ -47,7 +47,6 @@ def get_index(request):
 
 # Resist Idol
 def register_idol(request):
-    print('urei')
     if request.method == "GET":
         params = request.GET
         name = params.get('name')
@@ -56,7 +55,7 @@ def register_idol(request):
             ret = cloudinary.uploader.upload(image, public_id='samplename', format='png', api_key='547257318196367', api_secret='ns0Zb5YWq5I2DMv8i6PNSE0DRHo', cloud_name='hlimgugdc')
             url = ret['secure_url']
         else:
-            url='https://res.cloudinary.com/hlimgugdc/image/upload/v1560035850/samplename.png'
+            url='https://res.cloudinary.com/hlimgugdc/image/upload/v1560044044/samplename.png'
         address = params.get('address')
 
         print('ioioio')
